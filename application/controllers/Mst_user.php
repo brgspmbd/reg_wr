@@ -1,10 +1,10 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class User extends CI_Controller {
+class Mst_user extends CI_Controller {
     function __construct(){
 		parent::__construct();		
-		$this->load->model('m_user');
+		$this->load->model('m_mst_user');
                 $this->load->helper('url');
 	}
  
@@ -12,10 +12,10 @@ class User extends CI_Controller {
 		if($this->session->logged_in == FALSE){
             $this->load->view('/auth/v_login');
         }else{
-			$data['user'] = $this->m_user->tampil_data()->result();
+			$data['user'] = $this->m_mst_user->tampil_data()->result();
 			$this->load->view('layout/header',$data);
 			$this->load->view('layout/sidebar',$data);
-			$this->load->view('v_user',$data);
+			$this->load->view('v_mst_user',$data);
 			$this->load->view('layout/footer',$data);
 		}
 	}
@@ -26,14 +26,14 @@ class User extends CI_Controller {
 		$sidx			= $_GET['sidx']; // get index row - i.e. user click to sort 
 		$sord			= $_GET['sord']; // get the direction
 		if (!$sidx) $sidx = 1;
-		$data			= $this->m_user->record_list_user_count($search_header);
+		$data			= $this->m_mst_user->record_list_user_count($search_header);
 		$a				= $data->row();
 		$count		= $a->a;
 		$count > 0 ? $total_pages = ceil($count / $limit) : $total_pages = 0;
 			if ($page > $total_pages) $page = $total_pages;
 				$start = $limit * $page - $limit;
 			if ($start < 0) $start = 0;
-			$select				= $this->m_user->record_list_user_data($start, $limit, $sidx, $sord, $search_header);
+			$select				= $this->m_mst_user->record_list_user_data($start, $limit, $sidx, $sord, $search_header);
 		$responce			= new stdClass();
 		$responce->page	= $page;
 		$responce->total	= $total_pages;
@@ -48,47 +48,30 @@ class User extends CI_Controller {
 				$line->full_name,
 				$line->phone_number,
 				$line->country,
+				$line->type_of_attendance,
+				$line->status_approved,
 				$line->organization,
-				$line->akumulasi,
-			);
-			$i++;
-		}
-		echo json_encode($responce);
-	}
-	function list_subuser() {
-		$id= empty($_GET['id']) ? "" : $_GET['id'];
-		$page			= $_GET['page']; // get the requested page 
-		$limit		= $_GET['rows']; // get how many rows we want to have into the grid 
-		$sidx			= $_GET['sidx']; // get index row - i.e. user click to sort 
-		$sord			= $_GET['sord']; // get the direction
-		if (!$sidx) $sidx = 1;
-		$data			= $this->m_user->record_list_subuser_count($id);
-		$a				= $data->row();
-		$count		= $a->a;
-		$count > 0 ? $total_pages = ceil($count / $limit) : $total_pages = 0;
-			if ($page > $total_pages) $page = $total_pages;
-				$start = $limit * $page - $limit;
-			if ($start < 0) $start = 0;
-			$select				= $this->m_user->record_list_subuser_data($start, $limit, $sidx, $sord, $id);
-		$responce			= new stdClass();
-		$responce->page	= $page;
-		$responce->total	= $total_pages;
-		$responce->records= $count;
-		$i = 0;
-		foreach ($select as $line) {
-			$responce->rows[$i]['id'] = $line->id;
-			$responce->rows[$i]['cell'] = array(
-				$line->id,
-				$line->time_check_out,
-				$line->time_check_in,
-				$line->total_menit,
-				$line->activity_name,
+				$line->workunit,
 			);
 			$i++;
 		}
 		echo json_encode($responce);
 	}
 
+	function edit_user(){
+		$id = $this->input->post('id');
+		$email = $this->input->post('email');
+		$full_name = $this->input->post('full_name');
+		$phone_number = $this->input->post('phone_number');
+		$type_of_attendance = $this->input->post('type_of_attendance');
+		$data = array(
+			'email' => $email,
+			'full_name' => $full_name,
+			'phone_number' => $phone_number,
+			'type_of_attendance' => $type_of_attendance,
+		);
+		$this->m_mst_user->update($data, $id);
+	}
 	function approve(){
 		$id = $this->input->post('id');
 		$email = $this->input->post('email');
@@ -131,7 +114,7 @@ class User extends CI_Controller {
 		// Tampilkan pesan sukses atau error
 		if ($this->email->send()) {
 			// echo 'Sukses! email berhasil dikirim.';
-			$this->m_user->update($data, $id);
+			$this->m_mst_user->update($data, $id);
 		} else {
 			// echo 'Error! email tidak dapat dikirim.';
 		}

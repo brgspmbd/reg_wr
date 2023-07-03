@@ -70,56 +70,28 @@
 <script type="text/javascript">
     $(document).ready(function () {
       $("#list_user").jqGrid({
-        url: '<?php echo base_url(); ?>user/list_user',
+        url: '<?php echo base_url(); ?>mst_user/list_user',
         datatype: "json",
          rownumbers: true,
         colModel: [
-          { label: 'Id', name: 'id', index: 'id', width: 30 },
-          { label: 'Email', name: 'email', index: 'email',width: 120 },             
+          { label: 'Id', name: 'id', index: 'id', width: 30, key:true},
+          { label: 'Email', name: 'email', index: 'email',width: 120,editable:true },             
           { label: 'Title', name: 'title', index: 'title',width: 25 },             
-          { label: 'Full Name', name: 'full_name', index: 'full_name',width: 120 },             
-          { label: 'Phone', name: 'phone', index: 'phone',width: 100 },             
+          { label: 'Full Name', name: 'full_name', index: 'full_name',width: 200,editable:true },             
+          { label: 'Phone', name: 'phone_number', index: 'phone_number',width: 100,editable:true },             
           { label: 'Country', name: 'country', index: 'country',width: 100 },             
-          { label: 'Organization', name: 'organization', index: 'organization',width: 220 },   
-          { label: 'Time', name: 'time_menit', index: 'time_menit',width: 150 },   
+          { label: 'Type Of Attendence', name: 'type_of_attendance', index: 'type_of_attendance',width: 150,editable:true },   
+          { label: 'Status Approved', name: 'status_approved', index: 'status_approved',width: 150 },   
+          { label: 'Organization', name: 'organization', index: 'organization',width: 250 },   
+          { label: 'Work Unit', name: 'workunit', index: 'workunit',width: 250 },   
         ],
         viewrecords: true, // show the current page, data rang and total records on the toolbar
-        width: 1050,
+        width: "100%",
         shrinkToFit: false,
         height: '100%',
         rowNum: 10,
-	      subGrid: true,
-        // define the icons in subgrid
-        subGridOptions: {
-          "plusicon"  : "ui-icon-triangle-1-e",
-          "minusicon" : "ui-icon-triangle-1-s",
-          "openicon"  : "ui-icon-arrowreturn-1-e"
-        },
-        subGridRowExpanded: function(subgrid_id, row_id) {
-          var subgrid_table_id, pager_id;
-          subgrid_table_id = subgrid_id+"_t";
-          pager_id = "p_"+subgrid_table_id;
-          $("#"+subgrid_id).html("<table id='"+subgrid_table_id+"' class='scroll'></table><div id='"+pager_id+"' class='scroll'></div>");
-          jQuery("#"+subgrid_table_id).jqGrid({
-            url:"subgrid.php?q=2&id="+row_id,
-            url: '<?php echo base_url(); ?>user/list_subuser?id='+row_id,
-            datatype: "json",
-            colModel: [
-              { label: 'Id', name: 'id', index: 'id', width: 30 },
-              { label: 'Check In', name: 'time_check_out', index: 'time_check_out',width: 150 },             
-              { label: 'Check Out', name: 'time_check_in', index: 'time_check_in',width: 150 },             
-              { label: 'Total Menit', name: 'total_menit', index: 'total_menit',width: 100 },             
-              { label: 'Activity', name: 'activity', index: 'activity',width: 300 },       
-            ],
-            rowNum:20,
-            pager: pager_id,
-            sortname: 'id',
-            sortorder: "asc",
-            height: '100%'
-          });
-          jQuery("#"+subgrid_table_id).jqGrid('navGrid',"#"+pager_id,{search: false,edit:false,add:false,del:false})
-        },
         pager: "#list_userPager",
+        editurl: "<?php echo base_url(); ?>mst_user/edit_user",
         onSelectRow: function(id, selected) {
             var id = ($('#list_user').getCell(id, 'id'));
             if (id != null) {
@@ -136,13 +108,20 @@
         refreshtext: 'Reload',
       });
       jQuery("#list_user").jqGrid('inlineNav', "#list_userPager", {
-        edit: false,
+        edit: true,
         add: false,
-        save: false,
-        cancel: false,
+        save: true,
+        cancel: true,
         edittext: "Edit ",
         savetext: "Save",
         canceltext: "Cancel",
+      });
+      $("#list_user").navButtonAdd("#list_userPager", {
+         caption: "Down",
+         title: "Click here to Calculate",
+         buttonicon: "ui-icon-arrowthickstop-1-s",
+         onClickButton: function() {
+         }
       });
   });
   $(function () {
