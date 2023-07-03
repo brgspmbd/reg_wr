@@ -33,9 +33,9 @@
                 <div class="form-group row">
                   <div class="col-sm-12">
                     <center>
-                      <table id="jqGrid"></table>
+                      <table id="list_user"></table>
                     </center>
-                    <div id="jqGridPager"></div>
+                    <div id="list_userPager"></div>
                   </div>
                 </div>
                 <br>
@@ -93,27 +93,33 @@
 
 <script type="text/javascript">
     $(document).ready(function () {
-      $("#jqGrid").jqGrid({
-        url: '<?php echo base_url(); ?>engineering/drawing/jqgrid',
+      $("#list_user").jqGrid({
+        url: '<?php echo base_url(); ?>user/list_user',
         datatype: "json",
+         rownumbers: true,
         colModel: [
-          { label: 'Faktur No', name: 'ordersheetno', index: 'ordersheetno', width: 75 },
-          { label: 'Trans Date', name: 'trans_date', index: 'trans_date',width: 90 },             
+          { label: 'Id', name: 'id', index: 'id', width: 30 },
+          { label: 'Email', name: 'email', index: 'email',width: 120 },             
+          { label: 'Title', name: 'title', index: 'title',width: 25 },             
+          { label: 'Full Name', name: 'full_name', index: 'full_name',width: 120 },             
+          { label: 'Phone', name: 'phone', index: 'phone',width: 100 },             
+          { label: 'Country', name: 'country', index: 'country',width: 100 },             
+          { label: 'Organization', name: 'organization', index: 'organization',width: 150 },   
         ],
         viewrecords: true, // show the current page, data rang and total records on the toolbar
         width: 1050,
         shrinkToFit: false,
         height: '100%',
         rowNum: 10,
-        pager: "#jqGridPager",
+        pager: "#list_userPager",
         onSelectRow: function(id, selected) {
-            var ordersheetno = ($('#jqGrid').getCell(id, 'ordersheetno'));
+            var id = ($('#list_user').getCell(id, 'id'));
             if (id != null) {
-              $("#ordersheetno").val(ordersheetno);
+              $("#id").val(id);
             }
         },
       });
-      jQuery("#jqGrid").jqGrid('navGrid', "#jqGridPager", {
+      jQuery("#list_user").jqGrid('navGrid', "#list_userPager", {
         view: false,
         edit: false,
         add: false,
@@ -121,7 +127,7 @@
         search: false,
         refreshtext: 'Reload',
       });
-      jQuery("#jqGrid").jqGrid('inlineNav', "#jqGridPager", {
+      jQuery("#list_user").jqGrid('inlineNav', "#list_userPager", {
         edit: false,
         add: false,
         save: false,
@@ -130,7 +136,7 @@
         savetext: "Save",
         canceltext: "Cancel",
       });
-      $("#jqGrid").navButtonAdd("#jqGridPager", {
+      $("#list_user").navButtonAdd("#list_userPager", {
          caption: "Down",
          title: "Click here to Calculate",
          buttonicon: "ui-icon-arrowthickstop-1-s",

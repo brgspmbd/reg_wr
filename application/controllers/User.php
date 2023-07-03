@@ -19,6 +19,41 @@ class User extends CI_Controller {
 			$this->load->view('layout/footer',$data);
 		}
 	}
+	function list_user() {
+		$search_header= empty($_GET['search_header']) ? "" : $_GET['search_header'];
+		$page			= $_GET['page']; // get the requested page 
+		$limit		= $_GET['rows']; // get how many rows we want to have into the grid 
+		$sidx			= $_GET['sidx']; // get index row - i.e. user click to sort 
+		$sord			= $_GET['sord']; // get the direction
+		if (!$sidx) $sidx = 1;
+		$data			= $this->m_user->record_list_user_count($search_header);
+		$a				= $data->row();
+		$count		= $a->a;
+		$count > 0 ? $total_pages = ceil($count / $limit) : $total_pages = 0;
+			if ($page > $total_pages) $page = $total_pages;
+				$start = $limit * $page - $limit;
+			if ($start < 0) $start = 0;
+			$select				= $this->m_user->record_list_user_data($start, $limit, $sidx, $sord, $search_header);
+		$responce			= new stdClass();
+		$responce->page	= $page;
+		$responce->total	= $total_pages;
+		$responce->records= $count;
+		$i = 0;
+		foreach ($select as $line) {
+			$responce->rows[$i]['id'] = $line->id;
+			$responce->rows[$i]['cell'] = array(
+				$line->id,
+				$line->email,
+				$line->title,
+				$line->full_name,
+				$line->phone_number,
+				$line->country,
+				$line->organization,
+			);
+			$i++;
+		}
+		echo json_encode($responce);
+	}
 
 	function approve(){
 		$id = $this->input->post('id');

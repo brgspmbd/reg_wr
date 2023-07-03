@@ -1,196 +1,468 @@
 
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>User Approved</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">User Approved</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style>
+*{	margin:0;	padding:0; }
 
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Data User Approved</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table id="filterTable" class="table table-bordered table-hover">
-                  <thead>
-                  <tr>
-                    <th>Id</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                    <th>Photo</th>
-                    <th>Email</th>
-                    <th>Tittle</th>
-                    <th>Name</th>
-                    <th>Phone_Number</th>
-                    <th>Country</th>
-                    <th style="width: 200px">Organization</th>
-                    <th>Level</th>
-                    <th style="width: 200px">Work_Unit</th>
-                    <th>Type_Of_Attendance</th>
-                    <th>Activity_1</th>
-                    <th>Activity_2</th>
-                    <th>Activity_3</th>
-                    <th>Activity_4</th>
-                    <th>Activity_5</th>
-                    <th>Activity_6</th>
-                    <th>Activity_7</th>
-                    <th>Activity_8</th>
-                    <th>Activity_9</th>
-                    <th>Activity_10</th>
-                    <th>Activity_11</th>
-                    <th>Activity_12</th>
-                    <th>Activity_13</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <?php 
-                    foreach($user as $u){ 
-                  ?>
-                  <tr>
-                    <td><?php echo $u->id ?></td>
-                    <td><?php echo $u->status_approved ?></td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal<?php echo $u->id ?>">
-                        Edit
-                      </button>
-                    </td>
-                    <td><Img Style="Width: 50%" Src="<?Php Echo "https://amcorghatering.com/aarc2023/upload/bukti_tf/".$u->bukti_transfer; ?>"></td>
-                    <td><?php echo $u->email ?></td>
-                    <td><?php echo $u->title ?></td>
-                    <td><?php echo $u->full_name ?></td>
-                    <td><?php echo $u->phone_number ?></td>
-                    <td><?php echo $u->country ?></td>
-                    <td><?php echo $u->organization ?></td>
-                    <td><?php echo $u->level ?></td>
-                    <td><?php echo $u->workunit ?></td>
-                    <td><?php echo $u->type_of_attendance ?></td>
-                    <td><?php echo $u->activity1 ?></td>
-                    <td><?php echo $u->activity2 ?></td>
-                    <td><?php echo $u->activity3 ?></td>
-                    <td><?php echo $u->activity4 ?></td>
-                    <td><?php echo $u->activity5 ?></td>
-                    <td><?php echo $u->activity6 ?></td>
-                    <td><?php echo $u->activity7 ?></td>
-                    <td><?php echo $u->activity8 ?></td>
-                    <td><?php echo $u->activity9 ?></td>
-                    <td><?php echo $u->activity10 ?></td>
-                    <td><?php echo $u->activity11 ?></td>
-                    <td><?php echo $u->activity12 ?></td>
-                    <td><?php echo $u->activity13 ?></td>
-                  </tr>
-                  <?php } ?>
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-            </div>
-          <!-- /.col -->
-        </div>
-        <!-- /.row -->
-      </div>
-      <!-- /.container-fluid -->
-    </section>
-    <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  <!-- Edit modal -->
-  <?php 
-    foreach($user as $d){ 
-  ?>
-  <div class="modal fade" id="modal<?php echo $d->id ?>">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">User Approval</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p class="text-bold">Name : <?php echo $d->full_name ?></p>
-            <Img Style="Width: 50%" Src="<?Php Echo "https://amcorghatering.com/aarc2023/upload/bukti_tf/".$d->bukti_transfer; ?>">
-          </div>
-          <div class="modal-footer justify-content-between">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <form action="<?php echo base_url('User_approved/approve')?>" method="post">
-              <input type="hidden" value="<?php echo $d->id ?>" name="id"></input>
-              <button type="submit" class="btn btn-primary">Unapprove</button>
-            </form>
-          </div>
-        </div>
-        <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-  </div>
-  <?php } ?>
-<!-- End Edit modal -->
+body{
+	background:#eaeaea;
+	color:#fff;
+	font-size:18px;
+	font-family: 'Exo 2', sans-serif;
+}
 
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2023 <a href="#">AARC_2023</a>.</strong> All rights reserved.
-  </footer>
+a{
+	color:#34495e;	
+}
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
+
+
+
+/*WRAPPER*/
+#wrapper{ 
+	margin: 40px auto 0;	
+	width:266px; 
+	position:relative;
+}
+
+/* #txt{
+	color:#eaeaea;	
+} */
+
+
+/*WHEEL*/
+#wheel{
+	width:250px;
+	height:250px;
+	border-radius:50%;	
+	position:relative;
+	overflow:hidden;
+	border:8px solid #fff;
+	box-shadow:rgba(0,0,0,0.2) 0px 0px 10px, rgba(0,0,0,0.05) 0px 3px 0px;
+	transform: rotate(0deg);
+}
+
+#wheel:before{
+	content:'';
+	position:absolute;
+	border:4px solid rgba(0,0,0,0.1);
+	width:242px;
+	height:242px;
+	border-radius:50%;
+	z-index:1000;	
+}
+
+#inner-wheel{
+	width:100%;
+	height:100%;
+	
+	-webkit-transition: all 6s cubic-bezier(0,.99,.44,.99);
+	-moz-transition:    all 6 cubic-bezier(0,.99,.44,.99);
+	-o-transition:      all 6s cubic-bezier(0,.99,.44,.99);
+	-ms-transition:     all 6s cubic-bezier(0,.99,.44,.99);
+	transition:         all 6s cubic-bezier(0,.99,.44,.99);	
+}
+
+#wheel div.sec{
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 130px 75px 0;
+	border-color: #19c transparent;
+	transform-origin: 75px 129px;
+	left:50px;
+	top:-4px;	
+	opacity:1;
+}
+
+#wheel div.sec:nth-child(1){
+	transform: rotate(60deg);
+	-webkit-transform: rotate(60deg);
+	-moz-transform: rotate(60deg);
+	-o-transform: rotate(60deg);
+	-ms-transform: rotate(60deg);
+	border-color: #16a085 transparent;	
+}
+#wheel div.sec:nth-child(2){
+	transform: rotate(120deg);
+	-webkit-transform: rotate(120deg);
+	-moz-transform: rotate(120deg);
+	-o-transform: rotate(120deg);
+	-ms-transform: rotate(120deg);
+	border-color: #2980b9 transparent;	
+}
+#wheel div.sec:nth-child(3){
+	transform: rotate(180deg);
+	-webkit-transform: rotate(180deg);
+	-moz-transform: rotate(180deg);
+	-o-transform: rotate(180deg);
+	-ms-transform: rotate(180deg);
+	border-color: #34495e transparent;	
+}
+#wheel div.sec:nth-child(4){
+	transform: rotate(240deg);
+	-webkit-transform: rotate(240deg);
+	-moz-transform: rotate(240deg);
+	-o-transform: rotate(240deg);
+	-ms-transform: rotate(240deg);
+	border-color: #f39c12 transparent;	
+}
+#wheel div.sec:nth-child(5){
+	transform: rotate(300deg);
+	-webkit-transform: rotate(300deg);
+	-moz-transform: rotate(300deg);
+	-o-transform: rotate(300deg);
+	-ms-transform: rotate(300deg);
+	border-color: #d35400 transparent;	
+}
+#wheel div.sec:nth-child(6){
+	transform: rotate(360deg);
+	-webkit-transform: rotate(360deg);
+	-moz-transform: rotate(360deg);
+	-o-transform: rotate(360deg);
+	-ms-transform: rotate(360deg);
+	border-color: #c0392b transparent;	
+}
+#wheel div.sec:nth-child(7){
+	transform: rotate(340deg);
+	-webkit-transform: rotate(340deg);
+	-moz-transform: rotate(340deg);
+	-o-transform: rotate(340deg);
+	-ms-transform: rotate(340deg);
+	border-color: #c0392b transparent;	
+}
+
+
+#wheel div.sec .fa{
+	margin-top: -100px;
+	color: rgba(0,0,0,0.2);
+	position: relative;
+	z-index: 10000000;
+	display: block;
+	text-align: center;
+	font-size:36px;
+	margin-left:-15px;
+	
+	text-shadow: rgba(255, 255, 255, 0.1) 0px -1px 0px, rgba(0, 0, 0, 0.2) 0px 1px 0px;
+}
+
+
+
+
+#spin{
+	width:68px;
+	height:68px;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin:-34px 0 0 -34px;
+	border-radius:50%;
+	box-shadow:rgba(0,0,0,0.1) 0px 3px 0px;
+	z-index:1000;
+	background:#fff;
+	cursor:pointer;
+	font-family: 'Exo 2', sans-serif;
+  
+  -webkit-user-select: none; 
+  -moz-user-select: none;    
+  -ms-user-select: none;     
+  -o-user-select: none;
+  user-select: none;   
+}
+
+
+#spin:after{
+	content:"SPIN";	
+	text-align:center;
+	line-height:68px;
+	color:#CCC;
+	text-shadow: 0 2px 0 #fff, 0 -2px 0 rgba(0,0,0,0.3) ;
+	position: relative;
+	z-index: 100000;
+	width:68px;
+	height:68px;
+	display:block;
+}
+
+#spin:before{
+	content:"";
+	position:absolute;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 0 20px 28px 20px;
+	border-color: transparent transparent #ffffff transparent;
+	top:-12px;
+	left:14px;
+}
+
+#inner-spin{
+	width:54px;
+	height:54px;
+	position:absolute;
+	top:50%;
+	left:50%;
+	margin:-27px 0 0 -27px;
+	border-radius:50%;
+	background:red;
+	z-index:999;
+	box-shadow:rgba(255,255,255,1) 0px -2px 0px inset, rgba(255,255,255,1) 0px 2px 0px inset,  rgba(0,0,0,0.4) 0px 0px 5px ;
+	
+	background: rgb(255,255,255); /* Old browsers */
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%, rgba(234,234,234,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,255,255,1)), color-stop(100%,rgba(234,234,234,1))); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(234,234,234,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(234,234,234,1) 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(234,234,234,1) 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center,  rgba(255,255,255,1) 0%,rgba(234,234,234,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#eaeaea',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */	
+}
+
+#spin:active #inner-spin{
+	box-shadow:rgba(0,0,0,0.4) 0px 0px 5px inset;
+}
+
+#spin:active:after{
+	font-size:15px;	
+}
+
+
+
+#shine{
+	width:250px;
+	height:250px;
+	position:absolute;
+	top:0;
+	left:0;
+	background: -moz-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%, rgba(255,255,255,0.99) 1%, rgba(255,255,255,0.91) 9%, rgba(255,255,255,0) 100%); /* FF3.6+ */
+background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,rgba(255,255,255,1)), color-stop(1%,rgba(255,255,255,0.99)), color-stop(9%,rgba(255,255,255,0.91)), color-stop(100%,rgba(255,255,255,0))); /* Chrome,Safari4+ */
+background: -webkit-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.99) 1%,rgba(255,255,255,0.91) 9%,rgba(255,255,255,0) 100%); /* Chrome10+,Safari5.1+ */
+background: -o-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.99) 1%,rgba(255,255,255,0.91) 9%,rgba(255,255,255,0) 100%); /* Opera 12+ */
+background: -ms-radial-gradient(center, ellipse cover,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.99) 1%,rgba(255,255,255,0.91) 9%,rgba(255,255,255,0) 100%); /* IE10+ */
+background: radial-gradient(ellipse at center,  rgba(255,255,255,1) 0%,rgba(255,255,255,0.99) 1%,rgba(255,255,255,0.91) 9%,rgba(255,255,255,0) 100%); /* W3C */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#00ffffff',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+
+
+opacity:0.1;
+	
+}
+
+
+
+/*ANIMATION*/
+@-webkit-keyframes hh {
+  0%, 100%{
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+  }
+
+  50%{
+    transform: rotate(7deg);
+    -webkit-transform: rotate(7deg);
+  }
+}
+
+@keyframes hh {
+   0%, 100%{
+    transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+  }
+
+  50%{
+    transform: rotate(7deg);
+    -webkit-transform: rotate(7deg);
+  }
+}
+
+.spin {
+  -webkit-animation: hh 0.1s; /* Chrome, Safari, Opera */
+    animation: hh 0.1s;
+}
+
+
+
+
+</style>
+
+  <!-- jQuery -->
+  <script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="<?php echo base_url(); ?>assets/plugins/jquery-ui/jquery-ui.min.js"></script>
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body class="">
+
+<div class="container">
+  
+<div class="one">
+<div class="three">
+<div class="four">
+<div class="five">
+<div class="six">
 </div>
-<!-- ./wrapper -->
 
-<!-- jQuery -->
-<script src="<?= base_url('assets/'); ?>plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="<?= base_url('assets/'); ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="<?= base_url('assets/'); ?>dist/js/adminlte.min.js"></script>
-<!-- DataTables  & Plugins -->
-<script src="<?= base_url('assets/'); ?>plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="<?= base_url('assets/'); ?>plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?= base_url('assets/'); ?>plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="<?= base_url('assets/'); ?>plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="<?= base_url('assets/'); ?>plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="<?= base_url('assets/'); ?>plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="<?= base_url('assets/'); ?>plugins/jszip/jszip.min.js"></script>
-<script src="<?= base_url('assets/'); ?>plugins/pdfmake/pdfmake.min.js"></script>
-<script src="<?= base_url('assets/'); ?>plugins/pdfmake/vfs_fonts.js"></script>
-<script src="<?= base_url('assets/'); ?>plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="<?= base_url('assets/'); ?>plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="<?= base_url('assets/'); ?>plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
-
+<div id="wrapper">
+            
+        <div id="wheel">
+            <div id="inner-wheel">
+                <div class="sec" data-name="bell"><span class="fa fa-bell-o"></span></div>
+                <div class="sec" data-name="comment"><span class="fa fa-comment-o"></span></div>
+                <div class="sec" data-name="smile"><span class="fa fa-smile-o"></span></div>
+                <div class="sec" data-name="heart"><span class="fa fa-heart-o"></span></div>
+                <div class="sec" data-name="star"><span class="fa fa-star-o"></span></div>
+                <div class="sec" data-name="lightbulb"><span class="fa fa-lightbulb-o"></span></div>
+                <div class="sec" data-name="lightbulb3"><span class="fa fa-lightbulb-o"></span></div>
+                <div class="sec" data-name="lightbulb4"><span class="fa fa-lightbulb-o"></span></div>
+            </div>       
+           
+            <div id="spin">
+                <div id="inner-spin"></div>
+            </div>
+            
+            <div id="shine"></div>
+        </div>
+        
+        
+        <div id="txt"></div>
+  </div>
+ 
 <script>
-  $("document").ready(function () {
-    $("#filterTable").DataTable({
-      "scrollX": true,
-      "paging": true,
-      "lengthChange": true,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": true,
-      "responsive": false,
-    });
+    
+//set default degree (360*5)
+var degree = 1800;
+//number of clicks = 0
+var clicks = 0;
+var position=[];
+var position_name=[];
+var position_left=[];
+
+$(document).ready(function(){
+	
+	/*WHEEL SPIN FUNCTION*/
+	$('#spin').click(function(){
+		
+		//add 1 every click
+		clicks ++;
+		
+		/*multiply the degree by number of clicks
+	  generate random number between 1 - 360, 
+    then add to the new degree*/
+		var newDegree = degree*clicks;
+		var extraDegree = Math.floor(Math.random() * (360 - 1 + 1)) + 1;
+		totalDegree = newDegree+extraDegree;
+		
+		/*let's make the spin btn to tilt every
+		time the edge of the section hits 
+		the indicator*/
+    var function_call=false;
+		$('#wheel .sec').each(function(){
+			var t = $(this);
+			var noY = 0;
+			
+			var c = 0;
+			var n = 700;	
+			var interval = setInterval(function () {
+				c++;				  
+				if (c === n) { 
+					clearInterval(interval);
+				}	
+					 
+				var aoY = t.offset().top;
+				$("#txt").html(aoY);
+				// console.log(aoY);
+        console.log('this',position);
+        
+				
+				/*23.7 is the minumum offset number that 
+				each section can get, in a 30 angle degree.
+				So, if the offset reaches 23.7, then we know
+				that it has a 30 degree angle and therefore, 
+				exactly aligned with the spin btn*/
+				if(aoY < 23.89){
+					console.log('<<<<<<<<');
+					$('#spin').addClass('spin'); 
+					setTimeout(function () { 
+						$('#spin').removeClass('spin');
+					}, 100);	
+				} 
+     
+        if(c == n) {
+           if(function_call == false) {
+             console.log('done');
+                      console.log('ans',t.data('name'));
+             function_call=true;
+             getCounterData(aoY);
+                         
+           }
+          
+        }
+			}, 10);
+			
+			$('#inner-wheel').css({
+				'transform' : 'rotate(' + totalDegree + 'deg)'			
+			});
+		 
+			noY = t.offset().top;
+			
+		});
+	});
+	function setPosition() {
+    position=[];
+    position_name=[];
+    position_left=[];
+    console.log('reset');
+	$('.sec').each(function(){                 
+    var pos = $(this).offset().top;
+    var left_pos = $(this).offset().left;
+    position_left.push(left_pos);
+    position.push(pos);
+   position_name.push($(this).data('name'));
+    $(this).attr('data-position',pos);
+}); 
+}
+  setPosition();
+
+//console.log(position); 
+  
+  
+  function getCounterData(num) {
+    setPosition(); 
+    console.log("position",position_left,position_name);
+    current = position[0];
+    current_name = position_name[0];
+      console.log(current_name);
+    var $i=0;
+      position = sortWithIndeces(position);
+    console.log('wqewew',position,position[1],position.sortIndices[1]);       
+    current_name=position_name[position.sortIndices[1]];
+    //console.log('kk',current_name);          
+    alert(current_name); 
+      setPosition();  
+  }
+	
+});//DOCUMENT READY 
+
+
+function sortWithIndeces(toSort) {
+  for (var i = 0; i < toSort.length; i++) {
+    toSort[i] = [toSort[i], i];
+  }
+  toSort.sort(function(left, right) {
+    return left[0] < right[0] ? -1 : 1;
   });
+  toSort.sortIndices = [];
+  for (var j = 0; j < toSort.length; j++) {
+    toSort.sortIndices.push(toSort[j][1]);
+    toSort[j] = toSort[j][0];
+  }
+  return toSort;
+}
+	
+
+
 </script>
 </body>
 </html>
