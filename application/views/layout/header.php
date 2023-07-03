@@ -15,8 +15,33 @@
   <link rel="stylesheet" href="<?= base_url('assets/'); ?>plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
   <link rel="stylesheet" href="<?= base_url('assets/'); ?>plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
   <link rel="stylesheet" href="<?= base_url('assets/'); ?>plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- jQuery -->
+  <script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
+  <!-- jQuery UI 1.11.4 -->
+  <script src="<?php echo base_url(); ?>assets/plugins/jquery-ui/jquery-ui.min.js"></script>
   <!-- Theme style -->
   <link rel="stylesheet" href="<?= base_url('assets/'); ?>dist/css/adminlte.min.css">
+  <!-- JQGRID -->
+  <!-- The jQuery library is a prerequisite for all jqSuite products -->
+  <!-- This is the Javascript file of jqGrid -->   
+  <script type="text/ecmascript" src="<?php echo base_url(); ?>assets/plugins/jqgrid/js/trirand/jquery.jqGrid.min.js"></script>
+  <!-- This is the localization file of the grid controlling messages, labels, etc. -->
+  <!-- We support more than 40 localizations -->
+  <script type="text/ecmascript" src="<?php echo base_url(); ?>assets/plugins/jqgrid/js/trirand/i18n/grid.locale-en.js"></script>
+  <!-- The link to the CSS that the grid needs -->
+  <link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url(); ?>assets/plugins/jqgrid/css/jquery-ui.css" />
+  <!-- The link to the CSS that the grid needs -->
+  <link rel="stylesheet" type="text/css" media="screen" href="<?php echo base_url(); ?>assets/plugins/jqgrid/css/trirand/ui.jqgrid.css" />
+    
+  <!-- Select2 -->
+  <script src="<?php echo base_url(); ?>assets/plugins/select2/js/select2.full.min.js"></script>
+    <!-- Select2 -->
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+  <!-- Bootstrap 4 -->
+  <script src="<?= base_url('assets/'); ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="<?= base_url('assets/'); ?>dist/js/adminlte.min.js"></script>
   <style rel="stylesheet" type="text/css">
     .modal.modal-fullscreen .modal-dialog {
       width:100vw;

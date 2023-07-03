@@ -39,28 +39,56 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="<?= base_url(''); ?>user_approved" class="nav-link ">
-              <i class="nav-icon fas fa-user-check"></i>
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-key"></i>
               <p>
-                User Approved
+                Master
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="pages/search/simple.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Master User</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/search/enhanced.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Master Kegiatan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/search/enhanced.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Master Kartu</p>
+                </a>
+              </li>
+            </ul>
           </li>
           <li class="nav-item">
-            <a href="<?= base_url(''); ?>business_forum" class="nav-link ">
-              <i class="nav-icon fas fa-business-time"></i>
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-print"></i>
               <p>
-                Business Forum
+                Laporan
+                <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-          </li>
-          <li class="nav-item">
-            <a href="<?= base_url(''); ?>submission_paper" class="nav-link ">
-              <i class="nav-icon fas fa-paperclip"></i>
-              <p>
-                Submission Paper
-              </p>
-            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="pages/search/simple.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Laporan Kegiatan</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="pages/search/enhanced.html" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Cetak Sertifikat</p>
+                </a>
+              </li>
+            </ul>
           </li>
         </ul>
       </nav>

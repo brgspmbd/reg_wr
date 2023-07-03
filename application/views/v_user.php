@@ -30,76 +30,39 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-                <table id="filterTable" class="table table-bordered table-hover">
-                  <thead>
-                  <tr>
-                    <th>Id</th>
-                    <th>Status</th>
-                    <th>Action</th>
-                    <th>Photo</th>
-                    <th>Email</th>
-                    <th>Tittle</th>
-                    <th>Name</th>
-                    <th>Phone_Number</th>
-                    <th>Country</th>
-                    <th style="width: 200px">Organization</th>
-                    <th>Level</th>
-                    <th style="width: 200px">Work_Unit</th>
-                    <th>Type_Of_Attendance</th>
-                    <th>Activity_1</th>
-                    <th>Activity_2</th>
-                    <th>Activity_3</th>
-                    <th>Activity_4</th>
-                    <th>Activity_5</th>
-                    <th>Activity_6</th>
-                    <th>Activity_7</th>
-                    <th>Activity_8</th>
-                    <th>Activity_9</th>
-                    <th>Activity_10</th>
-                    <th>Activity_11</th>
-                    <th>Activity_12</th>
-                    <th>Activity_13</th>
-                  </tr>
-                  </thead>
-                  <tbody>
-                  <?php 
-                    foreach($user as $u){ 
-                  ?>
-                  <tr>
-                    <td><?php echo $u->id ?></td>
-                    <td><?php echo $u->status_approved ?></td>
-                    <td>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modal<?php echo $u->id ?>">
-                        Edit
-                      </button>
-                    </td>
-                    <td><Img Style="Width: 50%" Src="<?Php Echo "https://amcorghatering.com/aarc2023/upload/bukti_tf/".$u->bukti_transfer; ?>"></td>
-                    <td><?php echo $u->email ?></td>
-                    <td><?php echo $u->title ?></td>
-                    <td><?php echo $u->full_name ?></td>
-                    <td><?php echo $u->phone_number ?></td>
-                    <td><?php echo $u->country ?></td>
-                    <td><?php echo $u->organization ?></td>
-                    <td><?php echo $u->level ?></td>
-                    <td><?php echo $u->workunit ?></td>
-                    <td><?php echo $u->type_of_attendance ?></td>
-                    <td><?php echo $u->activity1 ?></td>
-                    <td><?php echo $u->activity2 ?></td>
-                    <td><?php echo $u->activity3 ?></td>
-                    <td><?php echo $u->activity4 ?></td>
-                    <td><?php echo $u->activity5 ?></td>
-                    <td><?php echo $u->activity6 ?></td>
-                    <td><?php echo $u->activity7 ?></td>
-                    <td><?php echo $u->activity8 ?></td>
-                    <td><?php echo $u->activity9 ?></td>
-                    <td><?php echo $u->activity10 ?></td>
-                    <td><?php echo $u->activity11 ?></td>
-                    <td><?php echo $u->activity12 ?></td>
-                    <td><?php echo $u->activity13 ?></td>
-                  </tr>
-                  <?php } ?>
-                  </tbody>
-                </table>
+                <div class="form-group row">
+                  <div class="col-sm-12">
+                    <center>
+                      <table id="jqGrid"></table>
+                    </center>
+                    <div id="jqGridPager"></div>
+                  </div>
+                </div>
+                <br>
+                <div class="form-group row ">
+                  <label for="ordersheetno" class="col-sm-2 col-form-label">Ordersheet No</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" id="ordersheetno" name="ordersheetno" placeholder="" disabled>
+                  </div>
+                </div>
+                <div class="form-group row ">
+                  <label for="pono" class="col-sm-2 col-form-label">PO No</label>
+                  <div class="col-sm-4">
+                    <input type="text" class="form-control" id="pono" name="pono" placeholder="" disabled>
+                  </div>
+                </div>
+                <div class="form-group row">
+                  <label for="exampleInputFile" class="col-sm-2 col-form-label">File input</label>
+                  <div class="input-group col-sm-4">
+                    <div class="custom-file">
+                    <input type="file" class="custom-file-input" id="exampleInputFile">
+                      <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                    </div>
+                    <div class="input-group-append">
+                      <span class="input-group-text">Upload</span>
+                    </div>
+                  </div>
+                </div>
               </div>
               <!-- /.card-body -->
             </div>
@@ -114,38 +77,6 @@
     <!-- /.content -->
   </div>
   <!-- /.content-wrapper -->
-  <!-- Edit modal -->
-  <?php 
-    foreach($user as $d){ 
-  ?>
-  <div class="modal fade" id="modal<?php echo $d->id ?>">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">User Approval</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-            <p class="text-bold">Name : <?php echo $d->full_name ?></p>
-            <Img Style="Width: 50%" Src="<?Php Echo "https://amcorghatering.com/aarc2023/upload/bukti_tf/".$d->bukti_transfer; ?>">
-          </div>
-          <div class="modal-footer justify-content-between">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-            <form action="<?php echo base_url('User/approve')?>" method="post">
-              <input type="hidden" value="<?php echo $d->id ?>" name="id"></input>
-              <input type="hidden" value="<?php echo $d->email ?>" name="email"></input>
-              <button type="submit" class="btn btn-primary">Approve</button>
-            </form>
-          </div>
-        </div>
-        <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-  </div>
-  <?php } ?>
-<!-- End Edit modal -->
 
   <footer class="main-footer">
     <strong>Copyright &copy; 2023 <a href="#">AARC_2023</a>.</strong> All rights reserved.
@@ -159,39 +90,65 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery -->
-<script src="<?= base_url('assets/'); ?>plugins/jquery/jquery.min.js"></script>
-<!-- Bootstrap 4 -->
-<script src="<?= base_url('assets/'); ?>plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
-<!-- AdminLTE App -->
-<script src="<?= base_url('assets/'); ?>dist/js/adminlte.min.js"></script>
-<!-- DataTables  & Plugins -->
-<script src="<?= base_url('assets/'); ?>plugins/datatables/jquery.dataTables.min.js"></script>
-<script src="<?= base_url('assets/'); ?>plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
-<script src="<?= base_url('assets/'); ?>plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
-<script src="<?= base_url('assets/'); ?>plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
-<script src="<?= base_url('assets/'); ?>plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
-<script src="<?= base_url('assets/'); ?>plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
-<script src="<?= base_url('assets/'); ?>plugins/jszip/jszip.min.js"></script>
-<script src="<?= base_url('assets/'); ?>plugins/pdfmake/pdfmake.min.js"></script>
-<script src="<?= base_url('assets/'); ?>plugins/pdfmake/vfs_fonts.js"></script>
-<script src="<?= base_url('assets/'); ?>plugins/datatables-buttons/js/buttons.html5.min.js"></script>
-<script src="<?= base_url('assets/'); ?>plugins/datatables-buttons/js/buttons.print.min.js"></script>
-<script src="<?= base_url('assets/'); ?>plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 
-<script>
-  $("document").ready(function () {
-    $("#filterTable").DataTable({
-      "scrollX": true,
-      "paging": true,
-      "lengthChange": true,
-      "searching": true,
-      "ordering": true,
-      "info": true,
-      "autoWidth": true,
-      "responsive": false,
-    });
+<script type="text/javascript">
+    $(document).ready(function () {
+      $("#jqGrid").jqGrid({
+        url: '<?php echo base_url(); ?>engineering/drawing/jqgrid',
+        datatype: "json",
+        colModel: [
+          { label: 'Faktur No', name: 'ordersheetno', index: 'ordersheetno', width: 75 },
+          { label: 'Trans Date', name: 'trans_date', index: 'trans_date',width: 90 },             
+        ],
+        viewrecords: true, // show the current page, data rang and total records on the toolbar
+        width: 1050,
+        shrinkToFit: false,
+        height: '100%',
+        rowNum: 10,
+        pager: "#jqGridPager",
+        onSelectRow: function(id, selected) {
+            var ordersheetno = ($('#jqGrid').getCell(id, 'ordersheetno'));
+            if (id != null) {
+              $("#ordersheetno").val(ordersheetno);
+            }
+        },
+      });
+      jQuery("#jqGrid").jqGrid('navGrid', "#jqGridPager", {
+        view: false,
+        edit: false,
+        add: false,
+        del: false,
+        search: false,
+        refreshtext: 'Reload',
+      });
+      jQuery("#jqGrid").jqGrid('inlineNav', "#jqGridPager", {
+        edit: false,
+        add: false,
+        save: false,
+        cancel: false,
+        edittext: "Edit ",
+        savetext: "Save",
+        canceltext: "Cancel",
+      });
+      $("#jqGrid").navButtonAdd("#jqGridPager", {
+         caption: "Down",
+         title: "Click here to Calculate",
+         buttonicon: "ui-icon-arrowthickstop-1-s",
+         onClickButton: function() {
+         }
+      });
   });
+  $(function () {
+    //Initialize Select2 Elements
+    $('.select2').select2()
+
+    //Initialize Select2 Elements
+    $('.select2bs4').select2({
+      theme: 'bootstrap4'
+    })
+
+  })
+  // DropzoneJS Demo Code End
 </script>
 </body>
 </html>
