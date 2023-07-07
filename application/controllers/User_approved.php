@@ -21,4 +21,8 @@ class User_approved extends CI_Controller {
 		$this->load->view('v_user_approved2');
 
 	}
+	function approve3(){
+		$this->load->view('v_user_approved3');
+
+	}
 }

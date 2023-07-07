@@ -1,186 +1,196 @@
-
-
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <style>* {
-	padding: 0;
-	margin: 0;
-	box-sizing: border-box;
-}
-body {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	overflow: hidden;
-	min-height: 100vh;
-	background: #00beac;
-}
-.container {
-	height: 350px;
-	width: 350px;
-	background: #4ed4c6;
-	position: relative;
-	top: 150px;
-    right: 570px;
-	border-radius: 50%;
-	overflow: hidden;
-	box-shadow: 0 0 10px gray;
-	transition: 3s all;
-}
-.container div {
-	height: 50%;
-	width: 200px;
-	clip-path: polygon(100% 0, 50% 100%, 0 0);
-	transform: translateX(-50%);
-	transform-origin: bottom;
-	position: absolute;
-	left: 21%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	font-size: 20px;
-	font-family: monospace;
-	font-weight: 1000;
-	color: #008276;
-	writing-mode: vertical-rl;
-}
-.container .one:nth-child(1) {
-	background: #baf4ee;
-	left: 50%;
-}
-.container .one:nth-child(2) {
-	background: #4ed4c6;
-	transform: rotate(60deg);
-}
-.container .one:nth-child(3) {
-	background: #baf4ee;
-	transform: rotate(120deg);
-}
-.container .one:nth-child(4) {
-	background: #4ed4c6;
-	transform: rotate(180deg);
-}
-.container .one:nth-child(5) {
-	background: #baf4ee;
-	transform: rotate(240deg);
-}
-.container .one:nth-child(6) {
-	background: #4ed4c6;
-	transform: rotate(300deg);
-}
-.container .one:nth-child(7) {
-	background: #4ed4c6;
-	transform: rotate(330deg);
-}
-.container .one:nth-child(8) {
-	background: #4ed4c6;
-	transform: rotate(360deg);
-}
-.mid {
-	height: 25px;
-	width: 25px;
-	top: 310px;
-    right: 730px;
-	border-radius: 50%;
-	position: absolute;
-	background: #008276;
-}
-#spin {
-	height: 100px;
-	width: 200px;
-	background: #4ed4c6;
-	position: absolute;
-	margin-top: 170px;
-    right: 650px;
-	font-size: 30px;
-	color: white;
-	font-weight: 1000;
-	letter-spacing: 4px;
-	border: 1px solid white;
-	cursor: pointer;
-	box-shadow: 0 5px 10px gray;
-	transition: 0.2s all;
-}
-#spin:hover {
-	box-shadow: none;
-}
-.stoper {
-	height: 50px;
-	width: 40px;
-	background: #ffd600;
-	position: absolute;
-	clip-path: polygon(100% 0, 50% 100%, 0 0);
-	margin-top: -200px;
-    right: 720px;
-}
-
-</style>
-
-  <!-- jQuery -->
-  <script src="<?php echo base_url(); ?>assets/plugins/jquery/jquery.min.js"></script>
-  <!-- jQuery UI 1.11.4 -->
-  <script src="<?php echo base_url(); ?>assets/plugins/jquery-ui/jquery-ui.min.js"></script>
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-</head>
-<body class="">
-
-  		<div class="container">
-			<div class="one" data-name="two">Motor</div>
-			<div class="one" data-name="two">TV</div>
-			<div class="one" data-name="three">Kipas</div>
-			<div class="one" data-name="four">jkll</div>
-			<div class="one" data-name="five">Support</div>
-			<div class="one" data-name="six">Coba Lagi</div>
-      	</div>
-		
-		  <div id="spin">
-                <div id="inner-spin"></div>
-            </div>
-      <span class="mid"></span>
-      <button id="spin">Nama</button>
-      <div class="stoper"></div>
-        <div id="txt"></div>
-    </div>
-	
-	<a href="javascript:void(0);" id="save" type="submit" class="btnx" style="padding: 9px 17px; font-size: 14px;" tabindex="3">Export</a>
-<script>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lucky Spin App Example</title>
+    <style>
+text{
+        font-family:Helvetica, Arial, sans-serif;
+        font-size:11px;
+        pointer-events:none;
+    }
+    #chart{
+        position:absolute;
+        width:500px;
+        height:500px;
+        top:0;
+        left:0;
+    }
+    #tes{
+        position:absolute;
+        width:500px;
+        height:500px;
+        top:0;
+        left:0;
+    }
+    #question{
+        position: absolute;
+        width:400px;
+        height:500px;
+        top:0;
+        left:520px;
+    }
+    #question h1{
+        font-size: 50px;
+        font-weight: bold;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        position: absolute;
+        padding: 0;
+        margin: 0;
+        top:50%;
+        -webkit-transform:translate(0,-50%);
+                transform:translate(0,-50%);
+    }
+    </style>
+  </head>
+  <body><div id="jquery-script-menu">
+	<div id="chart"></div>
+    <div id="question"><h1></h1></div>
     
-//set default degree (360*5)
-var degree = 1800;
-//number of clicks = 0
-var clicks = 0;
-var position=[];
-var position_name=[];
-var position_left=[];
-
-$(document).ready(function(){
-	
-	
-	jQuery("#save").click(function() {
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+			var padding = {top:20, right:40, bottom:0, left:0},
+            w = 500 - padding.left - padding.right,
+            h = 500 - padding.top  - padding.bottom,
+            r = Math.min(w, h)/2,
+            rotation = 0,
+            oldrotation = 0,
+            picked = 100000,
+            oldpick = [],
+            color = d3.scale.category20();//category20c()
+        var data = [
+                    {"label":"Dell LAPTOP",  "value":1,  "question":"What CSS property is used for specifying the area between the content and its border?"}, // padding
+                    {"label":"AAAAA",  "value":2,  "question":"What CSS property is used for changing the font?"}, //font-family
+                    {"label":"SUZUKI",  "value":3,  "question":"What CSS property is used for changing the color of text?"}, //color
+                    {"label":"ZONK",  "value":4,  "question":"What CSS property is used for changing the boldness of text?"}, //font-weight
+                    {"label":"FERRARI",  "value":5,  "question":"What CSS property is used for changing the size of text?"}, //font-size
+                    {"label":"ZONK",  "value":6,  "question":"What CSS property is used for changing the background color of a box?"}, //background-color
+        ];
+        var svg = d3.select('#chart')
+            .append("svg")
+            .data([data])
+            .attr("width",  w + padding.left + padding.right)
+            .attr("height", h + padding.top + padding.bottom);
+        var container = svg.append("g")
+            .attr("class", "chartholder")
+            .attr("transform", "translate(" + (w/2 + padding.left) + "," + (h/2 + padding.top) + ")");
+        var vis = container
+            .append("g");
+            
+        var pie = d3.layout.pie().sort(null).value(function(d){return 1;});
+        // declare an arc generator function
+        var arc = d3.svg.arc().outerRadius(r);
+        // select paths, use arc generator to draw
+        var arcs = vis.selectAll("g.slice")
+            .data(pie)
+            .enter()
+            .append("g")
+            .attr("class", "slice");
+            
+        arcs.append("path")
+            .attr("fill", function(d, i){ return color(i); })
+            .attr("d", function (d) { return arc(d); });
+        // add the text
+        arcs.append("text").attr("transform", function(d){
+                d.innerRadius = 0;
+                d.outerRadius = r;
+                d.angle = (d.startAngle + d.endAngle)/2;
+                return "rotate(" + (d.angle * 180 / Math.PI - 90) + ")translate(" + (d.outerRadius -10) +")";
+            })
+            .attr("text-anchor", "end")
+            .text( function(d, i) {
+                return data[i].label;
+            });
+        container.on("click", spin);
+        function spin(d){
+            container.on("click", null);
+            //all slices have been seen, all done
+            console.log("OldPick: " + oldpick.length, "Data length: " + data.length);
+            if(oldpick.length == data.length){
+                console.log("done");
+                container.on("click", null);
+                return;
+            }
+            var  ps       = 360/data.length,
+                 pieslice = Math.round(1440/data.length),
+                 rng      = Math.floor((Math.random() * 1440) + 360);
+                
+            rotation = (Math.round(rng / ps) * ps);
+            
+            picked = Math.round(data.length - (rotation % 360)/ps);
+            picked = picked >= data.length ? (picked % data.length) : picked;
+            if(oldpick.indexOf(picked) !== -1){
+                d3.select(this).call(spin);
+                return;
+            } else {
+                oldpick.push(picked);
+            }
+            rotation += 90 - Math.round(ps/2);
+            vis.transition()
+                .duration(3000)
+                .attrTween("transform", rotTween)
+                .each("end", function(){
+                    //mark question as seen
+                    d3.select(".slice:nth-child(" + (picked + 1) + ") path")
+                        .attr("fill", "#111");
+                    //populate question
+                    d3.select("#question h1")
+                        .text(data[picked].question);
+                    oldrotation = rotation;
+              
+                    /* Get the result value from object "data" */
+                    console.log(data[picked].value)
+              
+                    /* Comment the below line for restrict spin to sngle time */
+                    container.on("click", spin);
+                });
+        }
+        //make arrow
+        svg.append("g")
+            .attr("transform", "translate(" + (w + padding.left + padding.right) + "," + ((h/2)+padding.top) + ")")
+            .append("path")
+            .attr("d", "M-" + (r*.15) + ",0L0," + (r*.05) + "L0,-" + (r*.05) + "Z")
+            .style({"fill":"black"});
+        //draw spin circle
+        container.append("circle")
+            .attr("cx", 0)
+            .attr("cy", 0)
+            .attr("r", 60)
+            .style({"fill":"white","cursor":"pointer"});
+        //spin text
+        container.append("text")
+            .attr("x", 0)
+            .attr("y", 15)
+            .attr("text-anchor", "middle")
+            .text("SPIN")
+            .style({"font-weight":"bold", "font-size":"30px"});
         
-		let container = document.querySelector(".container");
-          let nama = document.getElementById("spin");
-          let number = Math.ceil(Math.random() * 10000);
-
-          let flash = document.querySelector(".container div");
-        //   if(data.spin == '1'){
-        //     $('#modaldatang').modal('show');
-        //   }else{
-            // nama.innerHTML = data.nama;
-            container.style.transform = "rotate(" + number + "deg)";
-            number += Math.ceil(Math.random() * 10000);
-			$('#wheel').each(function(){
-			var t = $(this);
-			console.log('ans',$('.container').data('name'));
-			});
-        //   }
-      });
-	
-});//DOCUMENT READY 
-
-
+        
+        function rotTween(to) {
+          var i = d3.interpolate(oldrotation % 360, rotation);
+          return function(t) {
+            return "rotate(" + i(t) + ")";
+          };
+        }
+        
+        
+        function getRandomNumbers(){
+            var array = new Uint16Array(1000);
+            var scale = d3.scale.linear().range([360, 1440]).domain([0, 100000]);
+            if(window.hasOwnProperty("crypto") && typeof window.crypto.getRandomValues === "function"){
+                window.crypto.getRandomValues(array);
+                console.log("works");
+            } else {
+                //no support for crypto, get crappy random numbers
+                for(var i=0; i < 1000; i++){
+                    array[i] = Math.floor(Math.random() * 100000) + 1;
+                }
+            }
+            return array;
+        }
 
 </script>
-</body>
+  </body>
 </html>
